@@ -14,10 +14,10 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int t;
-    cin >> t;
+    int T;
+    cin >> T;
 
-    while (t--)
+    while (T--)
     {
         int n;
         cin >> n;
@@ -28,26 +28,49 @@ int main()
         string t;
         cin >> t;
 
-        bool flag = true;
+        if (s == t || s[0] == '1')
+        {
+            cout << "YES\n";
+            continue;
+        }
+
+        int pos = -1;
         for (int i = 0; i < n; i++)
         {
-            if (s[i] != t[i])
+            if (s[i] == '1')
             {
-                if (s[0] != '1')
-                {
-                    flag = false;
-                    break;
-                }
+                pos = i;
+                break;
             }
         }
 
-        if (flag)
+        if (pos == -1)
         {
-            cout << "YES\n";
+            cout << "NO\n";
         }
         else
         {
-            cout << "NO\n";
+            bool ok = true;
+            for (int i = 0; i < n; i++)
+            {
+                if (s[i] != t[i])
+                {
+                    if (pos > i)
+                    {
+                        ok = false;
+                        break;
+                    }
+                }
+            }
+
+            if (ok)
+            {
+                cout << "YES\n";
+            }
+            else
+            {
+                cout << "NO\n";
+            }
         }
     }
 
